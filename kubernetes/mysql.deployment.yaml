@@ -23,12 +23,18 @@
             - image: mysql:5.7
               name: mysql
               env:
-                - name: MYSQL_USER
-                  value: wordpress_user
                 - name: MYSQL_DATABASE
                   value: wordpress_db
+                - name: MYSQL_USER
+                  valueFrom:
+                    secretKeyRef:
+                        name: mysql
+                        key: username
                 - name: MYSQL_PASSWORD
-                  value: wordpress_pass 
+                  valueFrom:
+                    secretKeyRef:
+                        name: mysql
+                        key: password 
                 - name: MYSQL_RANDOM_ROOT_PASSWORD
                   value: '1'
               ports:
