@@ -1,16 +1,16 @@
 ---
-    apiVersion: v1
-    kind: Service
-    metadata:
-      name: wordpress
-      namespace: my-wordpress
-      labels:
-        app: wordpress
-    spec:
-      type: LoadBalancer
-      ports:
-        - port: 8080
-          targetPort: 80
-      selector:
-        app: wordpress
-        tier: frontend
+apiVersion: v1
+kind: Service
+metadata:
+  name: wordpress
+  namespace: my-wordpress
+  labels:
+    app: wordpress
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 8080
+      targetPort: 80
+  selector:
+    app: wordpress
+    tier: frontend

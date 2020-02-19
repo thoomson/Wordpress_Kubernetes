@@ -1,27 +1,27 @@
 ---
-    apiVersion: apps/v1
-    kind: Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wordpress
+  namespace: my-wordpress
+  labels:
+    app: wordpress
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wordpress
+  strategy:
+    type: Recreate
+  template:
     metadata:
-      name: wordpress
-      namespace: my-wordpress
       labels:
         app: wordpress
+        tier: frontend
     spec:
-      replicas: 1
-      selector:
-        matchLabels:
-          app: wordpress
-      strategy:
-        type: Recreate
-      template:
-        metadata:
-          labels:
-            app: wordpress
-            tier: frontend
-        spec:
-          containers:
-            - image: wordpress:latest
+      containers:
+        - image: wordpress:latest
+          name: wordpress
+          ports:
+            - containerPort: 80
               name: wordpress
-              ports:
-                - containerPort: 80
-                  name: wordpress

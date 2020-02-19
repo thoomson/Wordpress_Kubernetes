@@ -1,42 +1,42 @@
 ---
-    apiVersion: apps/v1
-    kind: Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql
+  namespace: my-wordpress
+  labels:
+    app: wordpress
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wordpress
+  strategy:
+    type: Recreate
+  template:
     metadata:
-      name: mysql
-      namespace: my-wordpress
       labels:
         app: wordpress
+        tier: mysql
     spec:
-      replicas: 1
-      selector:
-        matchLabels:
-          app: wordpress
-      strategy:
-        type: Recreate
-      template:
-        metadata:
-          labels:
-            app: wordpress
-            tier: mysql
-        spec:
-          containers:
-            - image: mysql:5.7
+      containers:
+        - image: mysql:5.7
+          name: mysql
+          env:
+            - name: MYSQL_DATABASE
+              value: wordpress_db
+            - name: MYSQL_USER
+              valueFrom:
+                secretKeyRef:
+                    name: mysql
+                    key: username
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                    name: mysql
+                    key: password 
+            - name: MYSQL_RANDOM_ROOT_PASSWORD
+              value: '1'
+          ports:
+            - containerPort: 3306
               name: mysql
-              env:
-                - name: MYSQL_DATABASE
-                  value: wordpress_db
-                - name: MYSQL_USER
-                  valueFrom:
-                    secretKeyRef:
-                        name: mysql
-                        key: username
-                - name: MYSQL_PASSWORD
-                  valueFrom:
-                    secretKeyRef:
-                        name: mysql
-                        key: password 
-                - name: MYSQL_RANDOM_ROOT_PASSWORD
-                  value: '1'
-              ports:
-                - containerPort: 3306
-                  name: mysql
