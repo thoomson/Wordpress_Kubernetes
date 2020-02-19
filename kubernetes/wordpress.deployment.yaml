@@ -3,6 +3,7 @@
     kind: Deployment
     metadata:
       name: wordpress
+      namespace: my-wordpress
       labels:
         app: wordpress
     spec:
