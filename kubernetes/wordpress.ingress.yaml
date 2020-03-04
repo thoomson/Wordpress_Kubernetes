@@ -3,13 +3,12 @@ kind: Ingress
 metadata:
   name: wordpress
   namespace: my-wordpress
-  annotations:
-    ingress.kubernetes.io/rewrite-target: /wordpress/
 spec:
   rules:
-  - http:
+  - host: website.local
+    http:
       paths:
-        - path: /wordpress
+        - path: /
           backend:
             serviceName: wordpress
             servicePort: 80
