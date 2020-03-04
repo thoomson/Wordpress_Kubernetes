@@ -2,7 +2,11 @@
 
 ## Overview
 
-Not write yet..
+In this project, you will have worked :
+- WordPress
+- MySQL for WordPress
+- A monitoring system based on Prometheus & Grafana
+- A nginx has loadbalancer / proxy
 
 ## Usage
 
@@ -12,7 +16,13 @@ Not write yet..
 
 2. Install skaffold (more informations available on the official site : https://skaffold.dev/)
 
-3. Just run : `skaffold run`
+3. Install Helm (more informations available here: https://github.com/helm/helm)
+
+4. Install Prometheus with Helm. You can follow this very good tutorial : https://itnext.io/kubernetes-monitoring-with-prometheus-in-15-minutes-8e54d1de2e13
+
+5. Deploy Nginx Ingress Controller. Tutorial available here : https://kubernetes.github.io/ingress-nginx/deploy/
+
+6. Just run : `skaffold run`
 
 ## Result
 

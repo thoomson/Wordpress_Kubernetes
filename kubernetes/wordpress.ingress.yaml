@@ -1,0 +1,15 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: wordpress
+  namespace: my-wordpress
+  annotations:
+    ingress.kubernetes.io/rewrite-target: /wordpress/
+spec:
+  rules:
+  - http:
+      paths:
+        - path: /wordpress
+          backend:
+            serviceName: wordpress
+            servicePort: 80
