@@ -7,7 +7,7 @@ metadata:
   labels:
     app: wordpress
 spec:
-  replicas: 2
+  replicas: 3
   selector:
     matchLabels:
       app: wordpress
@@ -19,6 +19,8 @@ spec:
         app: wordpress
         tier: mysql
     spec:
+      hostname: db
+      subdomain: mysql
       containers:
         - image: mysql:5.7
           name: mysql
